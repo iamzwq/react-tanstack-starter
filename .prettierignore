@@ -1,0 +1,7 @@
+**/*.svg
+/node_modules/
+/dist/
+/.husky/
+/public/
+routeTree.gen.ts
+.tanstack
