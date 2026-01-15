@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from "./routes/__root";
 import { Route as AuthenticatedRouteRouteImport } from "./routes/_authenticated/route";
 import { Route as AuthenticatedIndexRouteImport } from "./routes/_authenticated/index";
+import { Route as AuthenticatedPage1IndexRouteImport } from "./routes/_authenticated/page1/index";
 
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: "/_authenticated",
@@ -21,24 +22,36 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   path: "/",
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any);
+const AuthenticatedPage1IndexRoute = AuthenticatedPage1IndexRouteImport.update({
+  id: "/page1/",
+  path: "/page1/",
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any);
 
 export interface FileRoutesByFullPath {
   "/": typeof AuthenticatedIndexRoute;
+  "/page1": typeof AuthenticatedPage1IndexRoute;
 }
 export interface FileRoutesByTo {
   "/": typeof AuthenticatedIndexRoute;
+  "/page1": typeof AuthenticatedPage1IndexRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
   "/_authenticated": typeof AuthenticatedRouteRouteWithChildren;
   "/_authenticated/": typeof AuthenticatedIndexRoute;
+  "/_authenticated/page1/": typeof AuthenticatedPage1IndexRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/";
+  fullPaths: "/" | "/page1";
   fileRoutesByTo: FileRoutesByTo;
-  to: "/";
-  id: "__root__" | "/_authenticated" | "/_authenticated/";
+  to: "/" | "/page1";
+  id:
+    | "__root__"
+    | "/_authenticated"
+    | "/_authenticated/"
+    | "/_authenticated/page1/";
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
@@ -61,15 +74,24 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AuthenticatedIndexRouteImport;
       parentRoute: typeof AuthenticatedRouteRoute;
     };
+    "/_authenticated/page1/": {
+      id: "/_authenticated/page1/";
+      path: "/page1";
+      fullPath: "/page1";
+      preLoaderRoute: typeof AuthenticatedPage1IndexRouteImport;
+      parentRoute: typeof AuthenticatedRouteRoute;
+    };
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute;
+  AuthenticatedPage1IndexRoute: typeof AuthenticatedPage1IndexRoute;
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedPage1IndexRoute: AuthenticatedPage1IndexRoute,
 };
 
 const AuthenticatedRouteRouteWithChildren =

@@ -2,7 +2,8 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "@tanstack/react-router";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient, router } from "@/router";
+import { router } from "@/router";
+import { queryClient } from "@/utils/query-client";
 
 import.meta.glob("./styles/*.css", { eager: true });
 

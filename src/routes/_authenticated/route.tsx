@@ -1,4 +1,7 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { AnimatePresence } from "motion/react";
+import { PageTransition } from "@/components/page-transtion";
+import { Sidebar } from "@/components/sidebar";
 
 export const Route = createFileRoute("/_authenticated")({
   // beforeLoad: () => {
@@ -29,7 +32,16 @@ function RouteComponent() {
       <header className="flex h-16 items-center border-b border-b-slate-200 px-4">
         Authenticated Layout
       </header>
-      <Outlet />
+      <section className="flex flex-1">
+        <Sidebar />
+        <main className="flex-1 overflow-hidden p-4">
+          <AnimatePresence mode="wait">
+            <PageTransition>
+              <Outlet />
+            </PageTransition>
+          </AnimatePresence>
+        </main>
+      </section>
     </>
   );
 }
