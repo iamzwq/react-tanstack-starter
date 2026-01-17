@@ -28,9 +28,11 @@ export const Route = createFileRoute("/_authenticated")({
 
 function RouteComponent() {
   return (
-    <>
+    <div className="flex h-screen flex-col">
       <header className="flex h-16 items-center border-b border-b-slate-200 px-4">
-        Authenticated Layout
+        <span className="bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-xl font-bold text-transparent">
+          Authenticated Layout
+        </span>
       </header>
       <section className="flex flex-1">
         <Sidebar />
@@ -42,6 +44,6 @@ function RouteComponent() {
           </AnimatePresence>
         </main>
       </section>
-    </>
+    </div>
   );
 }
