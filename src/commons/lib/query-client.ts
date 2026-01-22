@@ -41,7 +41,7 @@ export const queryClient = new QueryClient({
       if (query.meta?.disableGlobalErrorHandler) return;
       if (error.name === "AbortError") return;
 
-      const message = query.meta?.errorMessage || getErrorMessage(error);
+      const message = query.meta?.errorMessage ?? getErrorMessage(error);
       console.error("Query Error:", error, message);
     },
   }),
@@ -51,7 +51,7 @@ export const queryClient = new QueryClient({
       if (mutation.meta?.disableGlobalErrorHandler) return;
       if (error.name === "AbortError") return;
 
-      const message = mutation.meta?.errorMessage || getErrorMessage(error);
+      const message = mutation.meta?.errorMessage ?? getErrorMessage(error);
       console.error("Mutation Error:", error, message);
     },
     onSuccess: (_data, _variables, _context, mutation) => {
